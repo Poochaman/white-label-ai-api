@@ -1,0 +1,66 @@
+{
+  "request": {
+    "method": "POST",
+    "endpoint": "/v1/chat",
+    "headers": {
+      "Content-Type": "application/json",
+      "x-api-key": "your_api_key_here"
+    },
+    "body": {
+      "agentId": "sales-agent-uk",
+      "sessionMode": "stateless",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are an enterprise AI sales agent. Qualify inbound leads, answer product questions, and recommend next actions."
+        },
+        {
+          "role": "user",
+          "content": "We run a UK financial services firm and want a white-label AI agent for customer queries and lead qualification. Can it integrate with our CRM?"
+        }
+      ],
+      "context": {
+        "company": "Example Financial Services Ltd",
+        "region": "UK",
+        "source": "website",
+        "deploymentType": "white-label"
+      },
+      "tools": {
+        "crmLookup": true,
+        "knowledgeBase": true,
+        "calendarBooking": false,
+        "workflowAutomation": true
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "message": {
+        "role": "assistant",
+        "content": "Yes. The platform can support white-label AI deployment for customer query handling and lead qualification, with CRM integration via API or middleware. A typical implementation would separate customer-facing conversations from internal qualification and routing workflows, while maintaining auditability and controlled tool access."
+      },
+      "routing": {
+        "selectedAgent": "sales-agent-uk",
+        "reason": "Commercial enquiry requiring product explanation, lead qualification, and integration guidance"
+      },
+      "toolResults": [
+        {
+          "tool": "knowledgeBase",
+          "status": "used",
+          "summary": "Retrieved deployment and CRM integration patterns relevant to financial services"
+        }
+      ],
+      "nextActions": [
+        "Confirm CRM platform",
+        "Assess knowledge base sources",
+        "Review compliance and audit requirements",
+        "Define deployment scope"
+      ],
+      "usage": {
+        "inputMessages": 2,
+        "stateless": true
+      }
+    }
+  }
+}
